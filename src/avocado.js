@@ -43,7 +43,7 @@
    * setTargeting
    * type: public
    * description: Used to set key/value targeting keywords for units
-   */ 
+   */
   Avocado.prototype.setTargeting = function(key, value) {
     var values = this._parseTargetValues(value);
 
@@ -61,6 +61,16 @@
     }
 
     return this.targeting[key];
+  };
+
+
+  /**
+   * defineUnit
+   * type: public
+   * description: Creates a promo unit
+   */
+  Avocado.prototype.defineUnit = function(options) {
+    return options;
   };
 
   // Starting up Avocado!
