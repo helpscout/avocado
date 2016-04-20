@@ -28,5 +28,5 @@ Concept of how it will work:
   }
 </script>
 
-<div data-avocado-unit="something"></div>
+<div data-avocado-unit-id="something"></div>
 ```
