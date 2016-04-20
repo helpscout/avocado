@@ -1,0 +1,28 @@
+{
+  "name": "avocado",
+  "version": "1.0.0",
+  "description": "A simple JS powered promo system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helpscout/avocado.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helpscout/avocado/issues"
+  },
+  "homepage": "https://github.com/helpscout/avocado#readme",
+  "devDependencies": {
+    "browser-sync": "^2.12.3",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-watch": "^4.3.5",
+    "jshint": "^2.9.2",
+    "run-sequence": "^1.1.5"
+  }
+}
