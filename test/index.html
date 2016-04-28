@@ -4,6 +4,11 @@
     <title>Avocado</title>
   </head>
   <body>
+
+
+    <div data-avocado-unit-id="something"></div>
+    <div data-avocado-unit-id="something-else"></div>
+
     <script src="/js/avocado.js"></script>
     <script>
       if(window.Avocado) {
@@ -12,12 +17,17 @@
         Avocado.defineUnit({
           id: 'something',
           targeting: {
-            category: 'support'
+            category: ['support', 'growth']
           },
           content: 'Click me'
         });
+
+
+        Avocado.defineUnit({
+          id: 'something-else',
+          content: 'always render'
+        });
       }
     </script>
-    <div data-avocado-unit-id="something"></div>
   </body>
 </html>
