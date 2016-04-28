@@ -29,7 +29,7 @@
     var id = this.options.id;
 
     // Avocado and options.id is required
-    if(!Avocado || !id) {
+    if(!this.Avocado || !id) {
       return false;
     }
     
