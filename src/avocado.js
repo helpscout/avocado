@@ -7,6 +7,8 @@
     // Default attributes
     this.Avocado = false;
     this.el = false;
+    this.status = false;
+    this.targetMatch = [];
 
     this.options = {
       id: false,
@@ -84,7 +86,7 @@
    */
   AvocadoUnit.prototype._hasTargetKey = function(key) {
     var self = this;
-    var status = false;
+    var _match = {};
     var targeting = self.Avocado.targeting[key];
     var unitTargeting = self.options.targeting[key];
 
@@ -101,13 +103,24 @@
     }
 
     unitTargeting.forEach(function(value) {
-      if (targeting.indexOf(value) <= -1) {
-        return;
+      // Partial matching for URL
+      if ( key === 'url') {
+        if (targeting[0].indexOf(value) <= -1) {
+          return;
+        }
       }
-      status = true;
+      // Exact matching for all other cases
+      else {
+        if (targeting.indexOf(value) <= -1) {
+          return;
+        }
+      }
+      // Add to this.targetMatch array
+      _match[key] = value;
+      self.targetMatch.push(_match);
     });
 
-    return status;
+    return self.targetMatch;
   };
 
 
@@ -124,15 +137,15 @@
     if (!query) {
       return false;
     }
-  
+
     // Get the target element from the DOM
     _el = document.querySelector(query);
     if (!_el) {
       return false;
     }
-    
+
     // Creating the new unit
-    var unitElement = document.createElement('div');
+    unitElement = document.createElement('div');
     unitElement.setAttribute('data-avocado-unit-id', this.options.id);
 
     // Inserting it after the specified target
@@ -140,10 +153,11 @@
 
     if (_parent.lastChild === _el) {
       _parent.appendChild(unitElement);
-    } else {
+    }
+    else {
       _parent.insertBefore(unitElement, _el.nextSibling);
     }
-  
+
     // Returning the newly created unit
     return unitElement;
   };
@@ -188,7 +202,7 @@
    */
   AvocadoUnit.prototype.isTargeted = function() {
     // Avocado is required
-    if(!this.Avocado) {
+    if (!this.Avocado) {
       return false;
     }
 
@@ -197,13 +211,18 @@
 
     // No targeting set on Avocado
     // In this case, always render
-    if(!targeting) {
+    if (!targeting) {
       status = true;
       return status;
     }
     // Cross check all targeting values set on Avocado and the specific unit
     for (var key in targeting) {
-      status = this._hasTargetKey(key);
+      this._hasTargetKey(key);
+    }
+
+    // Check if targetMatch items are the same as specified in targeting options
+    if (this.targetMatch.length === Object.keys(this.options.targeting).length) {
+      status = true;
     }
 
     return status;
@@ -218,11 +237,13 @@
     var el = this.el;
     var content = this.options.content;
 
-    if(!el) {
+    if (!el) {
       return false;
     }
 
-    if(this.isTargeted()) {
+    this.status = this.isTargeted();
+
+    if (this.status) {
       // Rendering the content into the DOM
       el.innerHTML = content;
     }
@@ -281,6 +302,57 @@
 
 
   /**
+   * defineUnit
+   * type: public
+   * description: Creates a promo unit and adds it to the unit collection.
+   */
+  Avocado.prototype.defineUnit = function(options) {
+    if (!options || typeof options !== 'object') {
+      return false;
+    }
+
+    options.Avocado = this;
+
+    // Create the unit
+    var unit = new AvocadoUnit(options);
+
+    // Add unit to the unit collection
+    if (unit && unit.isActive()) {
+      this.units.push(unit);
+    }
+
+    // Returning the unit
+    return unit;
+  };
+
+
+  /**
+   * getUnitsActive
+   * type: public
+   * description: Returns an array of all units that have been successfully
+   * rendered into the DOM.
+   */
+  Avocado.prototype.getUnitsActive = function() {
+    return this.units.filter(function(unit) {
+      return unit.status;
+    });
+  };
+
+
+  /**
+   * getUnitsNotActive
+   * type: public
+   * description: Returns an array of all units that have not rendered into
+   * the DOM.
+   */
+  Avocado.prototype.getUnitsNotActive = function() {
+    return this.units.filter(function(unit) {
+      return !unit.status;
+    });
+  };
+
+
+  /**
    * setTargeting
    * type: public
    * description: Used to set key/value targeting keywords for units.
@@ -293,43 +365,19 @@
     }
 
     // Normalize the key
-    key = key.toLowerCase;
+    key = key.toLowerCase();
 
     if (!this.targeting[key]) {
       this.targeting[key] = {
         key: key,
         values: values
       };
-    } else {
+    }
+    else {
       this.targeting[key].values = [].concat(this.targeting[key].values, values);
     }
 
     return this.targeting[key];
-  };
-
-
-  /**
-   * defineUnit
-   * type: public
-   * description: Creates a promo unit and adds it to the unit collection.
-   */
-  Avocado.prototype.defineUnit = function(options) {
-    if(!options || typeof options !== 'object') {
-      return false;
-    }
-
-    options.Avocado = this;
-
-    // Create the unit
-    var unit = new AvocadoUnit(options);
-
-    // Add unit to the unit collection
-    if(unit && unit.isActive()) {
-      this.units.push(unit);
-    }
-
-    // Returning the unit
-    return unit;
   };
 
 
