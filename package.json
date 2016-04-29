@@ -1,6 +1,6 @@
 {
   "name": "avocado",
-  "version": "0.0.1-beta",
+  "version": "0.0.1-beta.1",
   "description": "A simple JS powered promo system",
   "main": "index.js",
   "scripts": {
