@@ -97,7 +97,7 @@
 
     // Normalize unit targeting
     if (typeof unitTargeting === 'string') {
-      unitTargeting = unitTargeting.replace(' ', '').split(',');
+      unitTargeting = unitTargeting.toLowerCase().split(',');
     }
 
     unitTargeting.forEach(function(value) {
@@ -268,7 +268,7 @@
     }
 
     if (typeof value === 'string') {
-      value = value.replace(' ', '').split(',');
+      value = value.toLowerCase().split(',');
       return value;
     }
 
@@ -291,6 +291,9 @@
     if (!key | !values) {
       return false;
     }
+
+    // Normalize the key
+    key = key.toLowerCase;
 
     if (!this.targeting[key]) {
       this.targeting[key] = {
