@@ -5,7 +5,7 @@ A simple JS powered promo system
 
 ## Features
 - dynamic targeting
-- analytics event tracking (e.g. Google Analytics)
+- analytics event tracking (e.g. Google Analytics) (COMING SOON!)
 - bypasses adblocker
 - light weight
 
