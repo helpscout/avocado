@@ -29,15 +29,15 @@
     var id = this.options.id;
 
     // Avocado and options.id is required
-    if(!this.Avocado || !id) {
+    if (!this.Avocado || !id) {
       return false;
     }
 
     // Defining the DOM element
-    this.el = document.querySelector('[data-avocado-unit-id="' + id + '"]');
+    this.getEl();
 
     // DOM element required
-    if(!this.el) {
+    if (!this.el) {
       return false;
     }
 
@@ -55,7 +55,8 @@
   AvocadoUnit.prototype._extend = function(object) {
     // Define default object
     object = object || {};
-    if(typeof object !== 'object') {
+
+    if (typeof object !== 'object') {
       object = {};
     }
 
@@ -87,7 +88,7 @@
     var targeting = self.Avocado.targeting[key];
     var unitTargeting = self.options.targeting[key];
 
-    if(!targeting || !targeting.values) {
+    if (!targeting || !targeting.values) {
       return status;
     }
 
@@ -95,12 +96,12 @@
     targeting = targeting.values;
 
     // Normalize unit targeting
-    if(typeof unitTargeting === 'string') {
+    if (typeof unitTargeting === 'string') {
       unitTargeting = unitTargeting.replace(' ', '').split(',');
     }
 
     unitTargeting.forEach(function(value) {
-      if(targeting.indexOf(value) <= -1) {
+      if (targeting.indexOf(value) <= -1) {
         return;
       }
       status = true;
@@ -108,6 +109,67 @@
 
     return status;
   };
+
+
+  /**
+   * createEl
+   * Type: Public
+   * Description: Creates the avocado unit if $el method is initialized
+   */
+  AvocadoUnit.prototype.createEl = function(query) {
+    var _el;
+    var _parent;
+    var unitElement;
+
+    if (!query) {
+      return false;
+    }
+  
+    // Get the target element from the DOM
+    _el = document.querySelector(query);
+    if (!_el) {
+      return false;
+    }
+    
+    // Creating the new unit
+    var unitElement = document.createElement('div');
+    unitElement.setAttribute('data-avocado-unit-id', this.options.id);
+
+    // Inserting it after the specified target
+    _parent = _el.parentNode;
+
+    if (_parent.lastChild === _el) {
+      _parent.appendChild(unitElement);
+    } else {
+      _parent.insertBefore(unitElement, _el.nextSibling);
+    }
+  
+    // Returning the newly created unit
+    return unitElement;
+  };
+
+  /**
+   * getEl
+   * Type: Public
+   * Description: Creates / defines the element to target in the DOM
+   */
+  AvocadoUnit.prototype.getEl = function() {
+    // Targeting method 1:
+    // jQuery-like targeting
+    if (this.options.$el && typeof this.options.$el === 'string') {
+      this.el = this.createEl(this.options.$el);
+    }
+
+    // Targeting method 2:
+    // Finding the avocado ID
+    if (this.options.id && typeof this.options.id === 'string') {
+      this.el = document.querySelector('[data-avocado-unit-id="' + this.options.id + '"]');
+    }
+
+
+    return this.el;
+  };
+
 
   /**
    * isActive

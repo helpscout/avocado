@@ -5,6 +5,70 @@
   </head>
   <body>
 
+<div class="blog-post" itemprop="articleBody">
+
+      <div data-avocado-unit-id="article-top"></div>
+
+      <p>The debate around organizational structure — “flat vs. hierarchical” — is as impassioned as “co-located vs. remote.” People have <em>feelings</em> about it, and they tend to come down on one side or the other.</p>
+
+<p>But it needn’t be so polarizing. Unlike the “co-located vs. remote” binary, it isn’t necessary to choose a side where org structure is concerned. Special snowflakes that they are, companies are entitled to create (and adapt, as they grow) structures that work for them. The reality is that any structure can work, provided it’s well executed (and yes, “flat” organizations require structure, perhaps more so than traditional ones).</p>
+
+<!--more--><div data-avocado-unit-id="article-more"></div>
+
+<h2>The flat trend</h2>
+
+<p>For a while there, we couldn’t get away from stories about “flat” organizations — businesses who threw out middle management and job titles in favor of self-directed work and cross-team innovation.</p>
+
+<p>And who could blame them? There’s a truckload to be said in favor of flat teams. Cost effectiveness, for one: fewer layers of management means less managerial overhead. Opportunities for collaboration and interconnectivity among workers can lead to creative initiatives. And decreased potential for managerial bottlenecks means that <a href="/blog/overachiever-culture/">high performers</a>, sick of being micromanaged, can focus and thrive on self-directed work.</p>
+
+<p>Startups latched onto this outside-the-box, no-limits thinking: <em>we don’t play by the rules! No stodgy men in suits ordering anyone around here! Ladder-climbing is for losers; horizontal growth is where it’s at!</em> Companies such as GitHub and Squarespace embraced a lack of restraints in pursuit of innovative peer-to-peer cultures. Zappos declared itself a “holocracy” (which, if you’re wondering what that means, has its own <a href="http://www.holacracy.org/constitution">constitution</a>).</p>
+
+<p>“Flat was startup-y and awesome,” <a href="http://wistia.com/blog/ditching-flat">admits Wistia CEO Chris Savage</a>. “Structure was BigCorp-y and boring.”</p>
+
+<h2>The pendulum swings the other way</h2>
+
+<p>The mistake was equating “structure” with “hierarchy.” Turns out, structure is a given however your company is organized, and if you're not deliberate about defining it, unintended power structures develop on their own. Informal cliques and unspoken hierarchies start to crop up, and “casual” cultures devolve into unprofessional ones that hire for “culture fit” and devalue outsiders’ perspectives. Since these structures are largely invisible, they’re therefore unaccountable, <a href="http://www.wired.com/2014/03/tyranny-flatness/">writes Klint Finley</a>. “That inevitably leads to dysfunction and abuse.”</p>
+
+<blockquote class="large">The issue, then, is the lack of intention.</blockquote>
+
+<p>Flat organization comes naturally to early-stage startups, where everyone chips in on everything; you can’t worry too much about titles when you’re hustling to get a business off the ground. That default tends to remain in place until the organization reaches a certain size — generally 25-40 people — and predictable pain points arise. <a href="/blog/remote-team-communication/">Communication suffers</a>. The speed at which decisions are reached or fixes occur slows to a crawl. Yucky problems, such as the need to fire underperforming teammates, take too long to come to the attention of people with the power to do anything about them. Founders realize they don’t know the name of the employee they just passed in the hallway.</p>
+
+<p>At that point, it’s time to make a call: remain flat or add levels of leadership? Many formerly flat companies — Wistia, Basecamp, Buffer, GitHub, Harvest, and yes, Help Scout, to name a few — are now opting for some version of the latter.</p>
+
+<h2>How we’re handling hierarchy at Help Scout</h2>
+
+<p><img src="/images/blog/2016/apr/4-28-chart.png" alt="How things work at Help Scout"></p>
+
+<p>We’ve found that disdain for hierarchy comes from experiences with poor management. When you’ve never had a great manager, a flat org structure looks pretty good. Micromanagers are the bad apples that have spoiled the bushel. And certainly, A+ managers are rare ... but isn’t that true for any hire?</p>
+
+<blockquote class="large">With capable management in place, you get the benefit of clearly defined roles, and  “makers” can focus on their craft.</blockquote>
+
+<p>For that reason, we recently added some new levels to our engineering team. Previously, the sub-teams were organized by function rather than cross-functionality, and our VP of Engineering had too many direct reports, which wasn’t fair to anyone. We needed a more defined structure to function at a high velocity, and we chose a setup (borrowing some ideas and terminology from <a href="https://vimeo.com/85490944">Spotify’s engineering culture</a>) that’s scaled successfully in larger organizations.</p>
+
+<p>Now, cross-functional squads own specific products or areas, while cross-squad guilds discuss and evolve best practices in particular areas of expertise (e.g., Java and PHP). “Coaches” support several squads and are responsible for one-on-ones, hiring, project management, transparency, and guiding squads toward their goals.</p>
+
+<p>This works for us, because</p>
+
+<ul>
+<li>One coach per 8-13 engineers keeps our company relatively flat</li>
+<li>The layers of hierarchy and number of managers stays conveniently low</li>
+<li>Squad members can do the work they do best</li>
+</ul>
+
+<p>Squads still get to determine the workflow that fits their style, and as experts in their functional areas, they retain authority regarding implementation of solutions and the amount of <a href="https://en.wikipedia.org/wiki/Technical_debt">technical debt</a> worth taking on.</p>
+
+<p>"No one here is a fan of hierarchy, but I think it’d be hasty to say all hierarchy is bad,” says Help Scout CEO Nick Francis. “Sometimes it’s necessary. I don’t really know how we’d get on without the concept of team leads.”</p>
+
+<h2>Structure happens anyway, so you might as well define yours</h2>
+
+<p>Since there’s no such thing as a structureless organization, you might as well proactively define your structure. In flatter organizations, you almost have to be <em>more</em> careful with that definition. That’s not to say “truly flat” can’t be done, just that considerations like size and interrelationships matter, and you’ll need more training and buy-in from everyone on the team and everyone you hire.</p>
+
+<p>As with everything else, the only constant in organizational structure is change. Hierarchy can work when you embrace change and adapt proactively. As we grow, we try to keep hierarchy to a minimum, but in optimizing for ownership and autonomy, we acknowledge that sometimes hierarchy can facilitate a greater sense of ownership and more autonomy. Everything’s a tradeoff. In the end, the execution is what matters.</p>
+
+
+      <div data-avocado-unit-id="article-bottom"></div>
+
+    </div>
 
     <div data-avocado-unit-id="something"></div>
     <div data-avocado-unit-id="something-else"></div>
@@ -26,6 +90,13 @@
         Avocado.defineUnit({
           id: 'something-else',
           content: 'always render'
+        });
+
+
+        Avocado.defineUnit({
+          $el: '.blog-post p:nth-of-type(3)',
+          id: 'jquery-insert',
+          content: 'jquery-like insert method'
         });
       }
     </script>
