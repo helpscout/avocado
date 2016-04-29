@@ -14,6 +14,8 @@ A simple JS powered promo system
 Concept of how it will work:
 
 ```
+<div data-avocado-unit-id="something"></div>
+
 <script>
   if(window.Avocado) {
     Avocado.setTargeting('category', 'support');
@@ -27,6 +29,4 @@ Concept of how it will work:
     });
   }
 </script>
-
-<div data-avocado-unit-id="something"></div>
 ```
