@@ -32,21 +32,21 @@
     if(!this.Avocado || !id) {
       return false;
     }
-    
+
     // Defining the DOM element
     this.el = document.querySelector('[data-avocado-unit-id="' + id + '"]');
-   
+
     // DOM element required
     if(!this.el) {
       return false;
     }
-    
+
     // Render the unit's content into the DOM
     this.render();
 
     return this;
   };
-  
+
   /**
    * _extend
    * Type: Private
@@ -58,7 +58,7 @@
     if(typeof object !== 'object') {
       object = {};
     }
-    
+
     // Native object extending
     for (var i = 1; i< arguments.length; i++) {
       if (!arguments[i]) {
@@ -74,50 +74,41 @@
 
     return object;
   };
-  
+
   /**
    * _hasTargetKey
    * Type: Private
    * Description: Loops through the targeting key/value pairs set on Avocado
    * and the individual unit to determine a match.
    */
-  AvocadoUnit.prototype._hasTargetKey = function(key, values) {
+  AvocadoUnit.prototype._hasTargetKey = function(key) {
     var self = this;
     var status = false;
-    var target;
+    var targeting = self.Avocado.targeting[key];
+    var unitTargeting = self.options.targeting[key];
 
-    if (!values) {
-      return false;
+    if(!targeting || !targeting.values) {
+      return status;
     }
 
-    // Looping through each of the targeting values
-    values.forEach(function(value) {
-      
-      target = self.Avocado.targeting[key];
-  
-      // Target must be an object with a value array/string
-      if(!target || !target.values) {
+    // Reassign targeting to get values
+    targeting = targeting.values;
+
+    // Normalize unit targeting
+    if(typeof unitTargeting === 'string') {
+      unitTargeting = unitTargeting.replace(' ', '').split(',');
+    }
+
+    unitTargeting.forEach(function(value) {
+      if(targeting.indexOf(value) <= -1) {
         return;
       }
-      
-      // Redefining target
-      target = target.values;
-      
-      if(Array.isArray(target)) {
-        if(target.indexOf(value) !== -1) {
-          status = true;
-        }
-      } else {
-        if (value === target) {
-          status = true;
-        }
-      }
-
+      status = true;
     });
 
     return status;
   };
-  
+
   /**
    * isActive
    * Type: Public
@@ -126,7 +117,7 @@
   AvocadoUnit.prototype.isActive = function() {
     return this.el && this.options.id;
   };
-  
+
   /**
    * isTargeted
    * Type: Public
@@ -148,15 +139,14 @@
       status = true;
       return status;
     }
-
     // Cross check all targeting values set on Avocado and the specific unit
-    for (var key in this.Avocado.targeting) {
-      status = this._hasTargetKey(key, targeting[key]);
+    for (var key in targeting) {
+      status = this._hasTargetKey(key);
     }
 
     return status;
   };
-  
+
   /**
    * render
    * Type: Public
@@ -276,8 +266,6 @@
     // Returning the unit
     return unit;
   };
-
-
 
 
   // Starting up Avocado!
