@@ -247,6 +247,10 @@
       // Rendering the content into the DOM
       el.innerHTML = content;
     }
+    else {
+      // Hide the unit in the DOM
+      el.style.display = 'none';
+    }
 
     return this;
   };
