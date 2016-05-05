@@ -3,6 +3,10 @@ A simple JS powered promo system
 
 ---
 
+![AW YEA. AVOCADOS!](http://i.giphy.com/l2JHRhAtnJSDNJ2py.gif)
+
+---
+
 ## Features
 - dynamic targeting
 - analytics event tracking (e.g. Google Analytics) (COMING SOON!)
