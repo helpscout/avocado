@@ -1,6 +1,6 @@
 (function() { 'use strict';
 
-  var VERSION = '0.0.1-beta.6';
+  var VERSION = '0.0.2';
 
   /**
    * AvocadoUnit Class constructor
@@ -267,6 +267,11 @@
    * description: Sets up Google Analytics tracking
    */
   AvocadoUnit.prototype.setupTracking = function() {
+    // Only setup tracking if rendered
+    if (!this.status) {
+      return this;
+    }
+
     // Return if clickTracking isn't enabled
     if (!this.options.clickTrack) {
       return this;

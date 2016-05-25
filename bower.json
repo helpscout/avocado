@@ -1,7 +1,7 @@
 {
   "name": "avocado",
   "description": "A simple JS powered promo system",
-  "main": "index.js",
+  "main": "src/avocado.js",
   "authors": [
     "ItsJonQ <itsjonq@gmail.com>"
   ],
@@ -14,5 +14,5 @@
     "test",
     "tests"
   ],
-  "version": "0.0.1-beta.6"
+  "version": "0.0.2"
 }
