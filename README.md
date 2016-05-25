@@ -9,7 +9,7 @@ A simple JS powered promo system
 
 ## Features
 - dynamic targeting
-- analytics event tracking (e.g. Google Analytics) (COMING SOON!)
+- analytics event tracking (Google Analytics)
 - bypasses adblocker
 - light weight
 
@@ -29,7 +29,8 @@ Concept of how it will work:
       targeting: {
         category: 'support'
       },
-      content: 'Click me'
+      content: 'Click me',
+      clickTrack: true
     });
   }
 </script>
