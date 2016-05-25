@@ -1,0 +1,18 @@
+{
+  "name": "avocado",
+  "description": "A simple JS powered promo system",
+  "main": "index.js",
+  "authors": [
+    "ItsJonQ <itsjonq@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/helpscout/avocado",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "0.0.1-beta.6"
+}
