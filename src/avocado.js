@@ -302,7 +302,7 @@
     }
 
     var data = {
-      eventCategory: 'Avocado-TEST',
+      eventCategory: 'Avocado',
       eventAction: 'click'
     };
 
