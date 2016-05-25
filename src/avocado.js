@@ -1,5 +1,7 @@
 (function() { 'use strict';
 
+  var VERSION = '0.0.1-beta.6';
+
   /**
    * AvocadoUnit Class constructor
    */
@@ -12,8 +14,12 @@
 
     this.options = {
       id: false,
+      clickTrack: false,
       content: false
     };
+
+    this.onClick = this.onClick.bind(this);
+
 
     this.initialize(options);
   };
@@ -45,6 +51,9 @@
 
     // Render the unit's content into the DOM
     this.render();
+
+    // Setups tracking
+    this.setupTracking();
 
     return this;
   };
@@ -252,12 +261,76 @@
   };
 
 
+  /**
+   * setupTracking
+   * type: Public
+   * description: Sets up Google Analytics tracking
+   */
+  AvocadoUnit.prototype.setupTracking = function() {
+    // Return if clickTracking isn't enabled
+    if (!this.options.clickTrack) {
+      return this;
+    }
+
+    var el = this.el;
+    if (this.options.clickTrack.$el) {
+      var _el = el.querySelector(this.options.clickTrack.$el);
+      el = _el ? _el : el;
+    }
+
+    // Return if a tracking el is not available
+    if (!el) {
+      return this;
+    }
+
+    el.addEventListener('touchstart', this.onClick);
+    el.addEventListener('click', this.onClick);
+
+    return this;
+  };
+
+
+  /**
+   * onClick
+   * type: Public
+   * description: Click event for the unit
+   */
+  AvocadoUnit.prototype.onClick = function(event) {
+    // Return of Google analytics is not present
+    if (!window.ga || !window.ga.loaded) {
+      return this;
+    }
+
+    var data = {
+      eventCategory: 'Avocado-TEST',
+      eventAction: 'click'
+    };
+
+    // Merge with options
+    if (this.options.clickTrack.eventCategory) {
+      data.eventCategory = this.options.clickTrack.eventCategory;
+    }
+    if (this.options.clickTrack.eventAction) {
+      data.eventAction = this.options.clickTrack.eventAction;
+    }
+    if (this.options.clickTrack.eventLabel) {
+      data.eventLabel = this.options.clickTrack.eventLabel;
+    }
+
+    // Send the event to Google Analytics
+    ga('send', 'event', data);
+
+    return this;
+  };
+
+
 
   /**
    * Avocado Class constructor
    */
   var Avocado = function() {
     // Default attributes
+    this.version = VERSION;
     this.targeting = {};
     this.units = [];
 
