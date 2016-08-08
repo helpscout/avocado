@@ -76,7 +76,6 @@
       <a data-avocado-link href="/#awesome">Avocado link. Don't render the promo unit</a>
       <a data-avocado-link>Avocado link. Don't render the promo unit</a>
       <a data-avocado-link href="/#awesome2">Avocado link. Don't render the promo unit</a>
-      <a data-avocado-link href="/#">Avocado link. Don't render the promo unit</a>
       <a data-avocado-link href="/#again">Avocado link. Don't render the promo unit</a>
 
       <p>Since there’s no such thing as a structureless organization, you might as well proactively define your structure. In flatter organizations, you almost have to be <em>more</em> careful with that definition. That’s not to say “truly flat” can’t be done, just that considerations like size and interrelationships matter, and you’ll need more training and buy-in from everyone on the team and everyone you hire.</p>
@@ -96,6 +95,7 @@
     <script>
       if(window.Avocado) {
         Avocado.setTargeting('category', 'support');
+        Avocado.setLinkPreferred(true);
 
         Avocado.defineUnit({
           id: 'something',

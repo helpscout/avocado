@@ -272,6 +272,11 @@
       return false;
     }
 
+    // Can't render if Avocado has been setup to prefer links
+    if (this.Avocado.linkPreferred && this.Avocado.hasLinks()) {
+      return false;
+    }
+
     if (this.status) {
       var _status = true;
       if (links.length && contentLinks.length) {
@@ -386,6 +391,7 @@
     this.links = [];
     this.targeting = {};
     this.units = [];
+    this.linkPreferred = false;
 
     this.initialize();
   };
@@ -474,6 +480,15 @@
     return this;
   };
 
+  /**
+   * hasLinks
+   * type: public
+   * description: Returns an array of urls defined by data-avocado-links
+   */
+  Avocado.prototype.hasLinks = function() {
+    return this.links.length;
+  };
+
 
   /**
    * getUnitsActive
@@ -498,6 +513,20 @@
     return this.units.filter(function(unit) {
       return !unit.status;
     });
+  };
+
+
+  /**
+   * setInlinePreferred
+   * type: public
+   * description: Prevents any units from rendering if data-avocado-links are
+   * defined
+   */
+  Avocado.prototype.setLinkPreferred = function(value) {
+    if (typeof value === 'boolean') {
+      this.linkPreferred = value;
+    }
+    return this;
   };
 
 
