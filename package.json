@@ -1,16 +1,21 @@
 {
-  "name": "avocado",
-  "version": "0.0.3",
+  "name": "avocado-promo",
+  "version": "0.0.2",
   "description": "A simple JS powered promo system",
   "main": "src/avocado.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": ">=4"
   },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "authors": [
+    "ItsJonQ <itsjonq@gmail.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/helpscout/avocado.git"
   },
-  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/helpscout/avocado/issues"
