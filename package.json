@@ -1,6 +1,6 @@
 {
   "name": "avocado",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple JS powered promo system",
   "main": "src/avocado.js",
   "scripts": {
@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/helpscout/avocado#readme",
   "devDependencies": {
-    "browser-sync": "^2.12.3",
+    "browser-sync": "^2.14.0",
     "gulp": "^3.9.1",
-    "gulp-jshint": "^2.0.0",
-    "gulp-uglify": "^1.5.3",
-    "gulp-watch": "^4.3.5",
+    "gulp-jshint": "^2.0.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.9",
     "jshint": "^2.9.2",
-    "run-sequence": "^1.1.5"
+    "run-sequence": "^1.2.2"
   }
 }

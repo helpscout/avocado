@@ -1,6 +1,6 @@
 (function() { 'use strict';
 
-  var VERSION = '0.0.2';
+  var VERSION = '0.0.3';
 
   /**
    * AvocadoUnit Class constructor
@@ -266,7 +266,6 @@
     var contentLinks = this.getContentLinks();
     var links = this.Avocado.links;
     var el = this.el;
-    var content = this.options.content;
     this.status = this.isTargeted();
 
     if (!el) {
@@ -348,7 +347,7 @@
    * type: Public
    * description: Click event for the unit
    */
-  AvocadoUnit.prototype.onClick = function(event) {
+  AvocadoUnit.prototype.onClick = function() {
     // Return of Google analytics is not present
     if (!window.ga || !window.ga.loaded) {
       return this;
@@ -371,7 +370,7 @@
     }
 
     // Send the event to Google Analytics
-    ga('send', 'event', data);
+    window.ga('send', 'event', data);
 
     return this;
   };
@@ -456,7 +455,8 @@
   /**
    * getLinks
    * type: public
-   * description: Retrieves href attributes of [data-avocado-link] to cross-check against for duplicates
+   * description: Retrieves href attributes of [data-avocado-link] to
+   * cross-check against for duplicates
    */
   Avocado.prototype.getLinks = function() {
     var links = document.querySelectorAll('[data-avocado-link]');
