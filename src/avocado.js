@@ -238,6 +238,60 @@
   };
 
   /**
+   * getContentLinks
+   * type: public
+   * description: Retrieves an array from the content with a list of href urls
+   */
+  AvocadoUnit.prototype.getContentLinks = function() {
+    var re = /href="([^\'\"]+)/g;
+    var content = this.options.content;
+    var matches = content.match(re);
+
+    if (matches) {
+      return matches.map(function(match) {
+        return match.replace('href="', '');
+      });
+    }
+    else {
+      return [];
+    }
+  };
+
+  /**
+   * canRender
+   * type: public
+   * description: Determines if the unit can render
+   */
+  AvocadoUnit.prototype.canRender = function() {
+    var contentLinks = this.getContentLinks();
+    var links = this.Avocado.links;
+    var el = this.el;
+    var content = this.options.content;
+    this.status = this.isTargeted();
+
+    if (!el) {
+      return false;
+    }
+
+    if (this.status) {
+      var _status = true;
+      if (links.length && contentLinks.length) {
+        // Cross-match links to filter out duplicates
+        _status = links.filter(function(link) {
+          // Returns an array with duplicates
+          return contentLinks.indexOf(link) >= 0;
+        });
+        // the unit CAN render if the duplicate array is empty
+        return !_status.length;
+      }
+      return _status;
+    }
+    else {
+      return false;
+    }
+  };
+
+  /**
    * render
    * Type: Public
    * Description: Injects the Unit's content into the DOM, if applicable.
@@ -246,13 +300,7 @@
     var el = this.el;
     var content = this.options.content;
 
-    if (!el) {
-      return false;
-    }
-
-    this.status = this.isTargeted();
-
-    if (this.status) {
+    if(this.canRender()) {
       // Rendering the content into the DOM
       el.innerHTML = content;
     }
@@ -336,6 +384,7 @@
   var Avocado = function() {
     // Default attributes
     this.version = VERSION;
+    this.links = [];
     this.targeting = {};
     this.units = [];
 
@@ -348,6 +397,7 @@
    * description: Createes Avocado!
    */
   Avocado.prototype.initialize = function() {
+    this.getLinks();
     return this;
   };
 
@@ -401,6 +451,27 @@
 
     // Returning the unit
     return unit;
+  };
+
+  /**
+   * getLinks
+   * type: public
+   * description: Retrieves href attributes of [data-avocado-link] to cross-check against for duplicates
+   */
+  Avocado.prototype.getLinks = function() {
+    var links = document.querySelectorAll('[data-avocado-link]');
+    if (!links.length) {
+      return false;
+    }
+    // Convert nodeList to array
+    links = Array.prototype.slice.call(links);
+    // Get list of href
+    this.links = links.map(function(el) {
+      if (el.getAttribute('href')) {
+        return el.getAttribute('href');
+      }
+    });
+    return this;
   };
 
 

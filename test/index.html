@@ -73,9 +73,16 @@
 
       <h2>Structure happens anyway, so you might as well define yours</h2>
 
+      <a data-avocado-link href="/#awesome">Avocado link. Don't render the promo unit</a>
+      <a data-avocado-link>Avocado link. Don't render the promo unit</a>
+      <a data-avocado-link href="/#awesome2">Avocado link. Don't render the promo unit</a>
+      <a data-avocado-link href="/#">Avocado link. Don't render the promo unit</a>
+      <a data-avocado-link href="/#again">Avocado link. Don't render the promo unit</a>
+
       <p>Since there’s no such thing as a structureless organization, you might as well proactively define your structure. In flatter organizations, you almost have to be <em>more</em> careful with that definition. That’s not to say “truly flat” can’t be done, just that considerations like size and interrelationships matter, and you’ll need more training and buy-in from everyone on the team and everyone you hire.</p>
 
       <p>As with everything else, the only constant in organizational structure is change. Hierarchy can work when you embrace change and adapt proactively. As we grow, we try to keep hierarchy to a minimum, but in optimizing for ownership and autonomy, we acknowledge that sometimes hierarchy can facilitate a greater sense of ownership and more autonomy. Everything’s a tradeoff. In the end, the execution is what matters.</p>
+
 
 
       <div data-avocado-unit-id="article-bottom"></div>
@@ -95,7 +102,7 @@
           targeting: {
             category: ['support', 'growth']
           },
-          content: '<a href="#">TRACKTHIS</a> Click me',
+          content: '<a href="#">TRACKTHIS</a> Click me <a>nolink</a>',
           clickTrack: {
             $el: 'a'
           }
@@ -104,12 +111,11 @@
 
         Avocado.defineUnit({
           id: 'something-else',
-          content: 'always render',
+          content: 'THIS SHOULD NOT BE RENDERED. <a href="/#awesome">DUP LINK</a>',
           clickTrack: {
             eventLabel: 'Awesome'
           }
         });
-
 
         Avocado.defineUnit({
           $el: '.blog-post p:nth-of-type(3)',
